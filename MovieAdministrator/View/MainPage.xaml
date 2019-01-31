@@ -22,20 +22,58 @@
                         <TextBlock Text="Sorting:" VerticalAlignment="Center"></TextBlock>
                         <ComboBox ItemsSource="{Binding MovieHandler.SortingList}"></ComboBox>
                     </StackPanel>
-                    <GridView RelativePanel.Below="TopStackPanel" ItemsSource="{Binding MovieHandler.Movies}" Margin="10">
+                    <GridView RelativePanel.Below="TopStackPanel" ItemsSource="{Binding MovieHandler.Movies}" SelectedItem="{Binding MovieHandler.SelectedMovie, Mode=TwoWay}" Margin="10">
                         <GridView.ItemTemplate>
                             <DataTemplate x:DataType="model:Movie">
                                 <StackPanel Margin="10" Height="300" Width="150">
-                                    <Image Source="{Binding Poster}" HorizontalAlignment="Center"></Image>
+                                    <Image Width="150" Height="200" Source="{Binding Poster}" HorizontalAlignment="Center"></Image>
                                     <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="{Binding Rating}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock FontStyle="Italic" FontSize="10" Text="{Binding Genre}" HorizontalAlignment="Center"></TextBlock>
+                                    <Image Source="{Binding Rating}" HorizontalAlignment="Center"></Image>
                                 </StackPanel>
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
+                    <Button RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" Content="Tilføj til liste" HorizontalAlignment="Center" Command="{Binding AddMovieToListCommand}"></Button>
                 </RelativePanel>
             </PivotItem>
-            <PivotItem Header="Administrating movies"></PivotItem>
+            <PivotItem Header="Liste">
+                <RelativePanel>
+                    <GridView ItemsSource="{Binding MovieHandler.ListOffMovies}" SelectedItem="{Binding MovieHandler.SelectedMovieFromList, Mode=TwoWay}" Margin="10">
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Movie">
+                                <StackPanel Margin="10" Height="300" Width="150">
+                                    <Image Width="150" Height="200" Source="{Binding Poster}" HorizontalAlignment="Center"></Image>
+                                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock FontStyle="Italic" FontSize="10" Text="{Binding Genre}" HorizontalAlignment="Center"></TextBlock>
+                                    <Image Source="{Binding Rating}" HorizontalAlignment="Center"></Image>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                    <Button RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" Content="Fjern fra liste" Command="{Binding RemoveMovieFromListCommand}"></Button>
+                </RelativePanel>
+            </PivotItem>
+            <PivotItem Header="Administrating movies">
+                <RelativePanel>
+                    <GridView ItemsSource="{Binding MovieHandler.Movies}" SelectedItem="{Binding MovieHandler.SelectedMovie, Mode=TwoWay}" Margin="10">
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Movie">
+                                <StackPanel Margin="10" Height="300" Width="150">
+                                    <Image Width="150" Height="200" Source="{Binding Poster}" HorizontalAlignment="Center"></Image>
+                                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock FontStyle="Italic" FontSize="10" Text="{Binding Genre}" HorizontalAlignment="Center"></TextBlock>
+                                    <Image Source="{Binding Rating}" HorizontalAlignment="Center"></Image>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                    <StackPanel RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWithPanel="True" Orientation="Horizontal">
+                        <Button Content="Tilføj film"></Button>
+                        <Button Content="Fjern film"></Button>
+                    </StackPanel>
+                </RelativePanel>
+            </PivotItem>
         </Pivot>
     </Grid>
 </Page>

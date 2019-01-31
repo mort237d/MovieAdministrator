@@ -1,4 +1,5 @@
-﻿using MovieAdministrator.Model;
+﻿using GalaSoft.MvvmLight.Command;
+using MovieAdministrator.Model;
 
 namespace MovieAdministrator.ViewModel
 {
@@ -10,6 +11,15 @@ namespace MovieAdministrator.ViewModel
         {
             get { return _movieHandler; }
             set { _movieHandler = value; }
+        }
+
+        public RelayCommand AddMovieToListCommand { get; set; }
+        public RelayCommand RemoveMovieFromListCommand { get; set; }
+
+        public MainViewModel()
+        {
+            AddMovieToListCommand = new RelayCommand(MovieHandler.AddMovieToList);
+            RemoveMovieFromListCommand = new RelayCommand(MovieHandler.RemoveMoviefromList);
         }
     }
 }

@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MovieAdministrator.Model
+﻿namespace MovieAdministrator.Model
 {
     class Movie
     {
-        private string _title, _poster, _genre;
-        private int _rating;
+        private string _title, _poster, _genre, _rating, _destination;
 
-        public Movie(string title, string poster, int rating, string genre)
+        public Movie(string title, string poster, string rating, string genre, string destination)
         {
             Title = title;
-            Poster = poster;
-            Rating = rating;
+            Poster = "Posters/" + poster;
+            Rating = "Ratings/" + rating;
             Genre = genre;
+            Destination = destination;
         }
 
         public string Title
@@ -31,7 +25,7 @@ namespace MovieAdministrator.Model
             set { _poster = value; }
         }
 
-        public int Rating
+        public string Rating
         {
             get { return _rating; }
             set { _rating = value; }
@@ -41,6 +35,12 @@ namespace MovieAdministrator.Model
         {
             get { return _genre; }
             set { _genre = value; }
+        }
+
+        public string Destination
+        {
+            get { return _destination; }
+            set { _destination = value; }
         }
     }
 }

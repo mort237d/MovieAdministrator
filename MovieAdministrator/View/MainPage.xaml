@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:view="using:MovieAdministrator.View"
     xmlns:viewModel="using:MovieAdministrator.ViewModel"
+    xmlns:model="using:MovieAdministrator.Model"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.DataContext>
@@ -17,10 +18,21 @@
         <Pivot>
             <PivotItem Header="Movies">
                 <RelativePanel>
-                    <StackPanel Name="TopStackPanel" Orientation="Horizontal">
-                        <TextBlock Text="Sorting:"></TextBlock>
+                    <StackPanel RelativePanel.AlignRightWithPanel="True" Name="TopStackPanel" Orientation="Horizontal">
+                        <TextBlock Text="Sorting:" VerticalAlignment="Center"></TextBlock>
+                        <ComboBox ItemsSource="{Binding MovieHandler.SortingList}"></ComboBox>
                     </StackPanel>
-                    <GridView RelativePanel.Below="TopStackPanel"></GridView>
+                    <GridView RelativePanel.Below="TopStackPanel" ItemsSource="{Binding MovieHandler.Movies}" Margin="10">
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Movie">
+                                <StackPanel Margin="10" Height="300" Width="150">
+                                    <Image Source="{Binding Poster}" HorizontalAlignment="Center"></Image>
+                                    <TextBlock Text="{Binding Title}" HorizontalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding Rating}" HorizontalAlignment="Center"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
                 </RelativePanel>
             </PivotItem>
             <PivotItem Header="Administrating movies"></PivotItem>

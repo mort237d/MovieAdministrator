@@ -11,6 +11,7 @@ namespace MovieAdministrator.View
     {
         public MainPage()
         {
+            InitializeComponent();
         }
     }
 }

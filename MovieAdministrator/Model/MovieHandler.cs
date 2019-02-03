@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using MovieAdministrator.Annotations;
 
@@ -67,6 +68,17 @@ namespace MovieAdministrator.Model
         public void RemoveMoviefromList()
         {
             ListOffMovies.Remove(SelectedMovieFromList);
+        }
+
+        public void sort()
+        {
+            List<Movie> temp = Movies.OrderBy(o => o.Title).ToList();
+
+            Movies.Clear();
+            foreach (var movie in temp)
+            {
+                Movies.Add(movie);
+            }
         }
 
         #region INotify

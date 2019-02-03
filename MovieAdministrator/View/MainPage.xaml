@@ -34,7 +34,10 @@
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
-                    <Button RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" Content="Tilføj til liste" HorizontalAlignment="Center" Command="{Binding AddMovieToListCommand}"></Button>
+                    <StackPanel RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal">
+                        <Button Content="Tilføj til liste" HorizontalAlignment="Center" Command="{Binding AddMovieToListCommand}"></Button>
+                        <Button Content="Sortér" HorizontalAlignment="Center" Command="{Binding Sort}"></Button>
+                    </StackPanel>
                 </RelativePanel>
             </PivotItem>
             <PivotItem Header="Liste">

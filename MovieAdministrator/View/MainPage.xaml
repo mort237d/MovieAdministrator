@@ -20,7 +20,7 @@
                 <RelativePanel>
                     <StackPanel RelativePanel.AlignRightWithPanel="True" Name="TopStackPanel" Orientation="Horizontal">
                         <TextBlock Text="Sorting:" VerticalAlignment="Center"></TextBlock>
-                        <ComboBox ItemsSource="{Binding MovieHandler.SortingList}"></ComboBox>
+                        <ComboBox ItemsSource="{Binding MovieHandler.SortingList}" SelectedItem="{Binding MovieHandler.SelectedSorting, Mode=TwoWay}"></ComboBox>
                     </StackPanel>
                     <GridView RelativePanel.Below="TopStackPanel" ItemsSource="{Binding MovieHandler.Movies}" SelectedItem="{Binding MovieHandler.SelectedMovie, Mode=TwoWay}" Margin="10">
                         <GridView.ItemTemplate>
@@ -36,7 +36,6 @@
                     </GridView>
                     <StackPanel RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" Orientation="Horizontal">
                         <Button Content="Tilføj til liste" HorizontalAlignment="Center" Command="{Binding AddMovieToListCommand}"></Button>
-                        <Button Content="Sortér" HorizontalAlignment="Center" Command="{Binding Sort}"></Button>
                     </StackPanel>
                 </RelativePanel>
             </PivotItem>

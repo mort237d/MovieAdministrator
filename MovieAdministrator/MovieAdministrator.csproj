@@ -184,6 +184,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="View\Posters\adams_aebler.jpg" />
     <Content Include="View\Posters\maend_og_hoens_plakat.jpg" />
+    <Content Include="View\Posters\poster.png" />
     <Content Include="View\Ratings\0.png" />
     <Content Include="View\Ratings\1.png" />
     <Content Include="View\Ratings\2.png" />

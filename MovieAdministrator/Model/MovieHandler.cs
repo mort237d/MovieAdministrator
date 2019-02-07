@@ -11,20 +11,28 @@ namespace MovieAdministrator.Model
     class MovieHandler : INotifyPropertyChanged
     {
         private List<string> _sortingList;
-        private ObservableCollection<Movie> _movies;
+        private ObservableCollection<Movie> _dntMovies;
+        private ObservableCollection<Movie> _movies = new ObservableCollection<Movie>();
         private ObservableCollection<Movie> _listOffMovies = new ObservableCollection<Movie>();
         private Movie _selectedMovie, _selectedMovieFromList;
-        private string _selectedSorting;
+        private string _selectedSorting, _userSearch;
+        private bool _visible = false;
+
+        private string _title, _poster, _genre, _rating, _destination;
 
         public MovieHandler()
         {
             SortingList = new List<string>(){"Ratings", "A-Z", "Z-A", "Genre"};
-            Movies = new ObservableCollection<Movie>()
+            DntMovies = new ObservableCollection<Movie>()
             {
                 new Movie("Mænd og Høns", "maend_og_hoens_plakat.jpg", "5.png", "Komedie", ""),
                 new Movie("Adams Æbler", "adams_aebler.jpg", "4.png", "Komedie", ""),
                 new Movie("Gamle mænd i nye biler", "poster.png", "3.png", "Vold", "")
             };
+            foreach (var movie in DntMovies)
+            {
+                Movies.Add(movie);
+            }
         }
 
         public List<string> SortingList
@@ -77,9 +85,87 @@ namespace MovieAdministrator.Model
             }
         }
 
+        public string UserSearch
+        {
+            get { return _userSearch; }
+            set
+            {
+                _userSearch = value;
+                OnPropertyChanged();
+
+                Search();
+            }
+        }
+
+        public ObservableCollection<Movie> DntMovies
+        {
+            get { return _dntMovies; }
+            set { _dntMovies = value; }
+        }
+
+        public bool Visible
+        {
+            get { return _visible; }
+            set
+            {
+                _visible = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        public string Poster
+        {
+            get { return _poster; }
+            set
+            {
+                _poster = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        public string Genre
+        {
+            get { return _genre; }
+            set
+            {
+                _genre = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Rating
+        {
+            get { return _rating; }
+            set
+            {
+                _rating = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Destination
+        {
+            get { return _destination; }
+            set
+            {
+                _destination = value; 
+                OnPropertyChanged();
+            }
+        }
+
         public void AddMovieToList()
         {
-            if (!ListOffMovies.Contains(SelectedMovie))
+            if (!ListOffMovies.Contains(SelectedMovie) && SelectedMovie != null)
             {
                 ListOffMovies.Add(SelectedMovie);
             }
@@ -114,6 +200,30 @@ namespace MovieAdministrator.Model
             {
                 Movies.Add(movie);
             }
+        }
+
+        public void Search()
+        {
+            Movies.Clear();
+            foreach (var movie in DntMovies)
+            {
+                if (movie.Title.ToLower().Contains(_userSearch.ToLower()))
+                {
+                    Movies.Add(movie);
+                    Debug.WriteLine(movie.Title);
+                }
+            }
+        }
+
+        public void RemoveMovie()
+        {
+            DntMovies.Remove(SelectedMovie);
+            Movies.Remove(SelectedMovie);
+        }
+
+        public void AddVisible()
+        {
+            Visible = true;
         }
 
         #region INotify

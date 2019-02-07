@@ -16,13 +16,19 @@ namespace MovieAdministrator.ViewModel
         public RelayCommand AddMovieToListCommand { get; set; }
         public RelayCommand RemoveMovieFromListCommand { get; set; }
 
-        public RelayCommand Sort { get; set; }
-        public RelayCommand ReverseSort { get; set; }
+        public RelayCommand RemoveMovieCommand { get; set; }
+        public RelayCommand AddMovieCommand { get; set; }
+
+        public RelayCommand AddVisibibleCommand { get; set; }
 
         public MainViewModel()
         {
             AddMovieToListCommand = new RelayCommand(MovieHandler.AddMovieToList);
             RemoveMovieFromListCommand = new RelayCommand(MovieHandler.RemoveMoviefromList);
+
+            RemoveMovieCommand = new RelayCommand(MovieHandler.RemoveMovie);
+
+            AddVisibibleCommand = new RelayCommand(MovieHandler.AddVisible);
         }
     }
 }

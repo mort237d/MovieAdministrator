@@ -15,12 +15,43 @@
     </Page.DataContext>
 
     <Grid>
+
+        <Popup IsOpen="{Binding MovieHandler.Visible}" Grid.Row="0" Width="400" Height="1000" HorizontalAlignment="Right" VerticalAlignment="Top" LightDismissOverlayMode="On" IsLightDismissEnabled="True" Margin="-12,0,0,0">
+            <Popup.ChildTransitions>
+                <TransitionCollection>
+                    <PaneThemeTransition Edge="Right"/>
+                </TransitionCollection>
+            </Popup.ChildTransitions>
+
+            <StackPanel Background="#6CA0DC" Height="1000" Width="400">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,0">
+                    <TextBlock Text="Tilføj Produkt" FontWeight="Bold" FontSize="50" HorizontalAlignment="Center"/>
+                    <TextBox Margin="2" PlaceholderText="Titel" Text="{Binding MovieHandler.Title, Mode=TwoWay}"/>
+                    <TextBox Margin="2" PlaceholderText="Genre" Text="{Binding MovieHandler.Genre, Mode=TwoWay}"/>
+                    <TextBox Margin="2" PlaceholderText="Destination" Text="{Binding MovieHandler.Destination, Mode=TwoWay}"/>
+                    <StackPanel Orientation="Horizontal" Margin="2">
+                        <TextBox IsReadOnly="True" PlaceholderText="Plakat" Width="280" Text="{Binding MovieHandler.Poster, Mode=TwoWay}"/>
+                        <Button Content="..." Width="40"/>
+                    </StackPanel>
+                    <ComboBox Margin="2" PlaceholderText="Rating" Width="320" SelectedItem="{Binding MovieHandler.Rating}">
+                        <ComboBoxItem Content="0"/>
+                        <ComboBoxItem Content="1"/>
+                        <ComboBoxItem Content="2"/>
+                        <ComboBoxItem Content="3"/>
+                        <ComboBoxItem Content="4"/>
+                        <ComboBoxItem Content="5"/>
+                    </ComboBox>
+                    <Button Margin="20" HorizontalAlignment="Center" Content="Tilføj film" Command="{Binding AddMovieCommand}"/>
+                </StackPanel>
+            </StackPanel>
+        </Popup>
+
         <Pivot>
             <PivotItem Header="Movies">
                 <RelativePanel>
                     <StackPanel RelativePanel.AlignRightWithPanel="True" Name="TopStackPanel" Orientation="Horizontal">
-                        <TextBlock Text="Sorting:" VerticalAlignment="Center"></TextBlock>
-                        <ComboBox ItemsSource="{Binding MovieHandler.SortingList}" SelectedItem="{Binding MovieHandler.SelectedSorting, Mode=TwoWay}"></ComboBox>
+                        <TextBox Width="200" PlaceholderText="Søg..." Text="{Binding MovieHandler.UserSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <ComboBox PlaceholderText="Sortér" ItemsSource="{Binding MovieHandler.SortingList}" SelectedItem="{Binding MovieHandler.SelectedSorting, Mode=TwoWay}"></ComboBox>
                     </StackPanel>
                     <GridView RelativePanel.Below="TopStackPanel" ItemsSource="{Binding MovieHandler.Movies}" SelectedItem="{Binding MovieHandler.SelectedMovie, Mode=TwoWay}" Margin="10">
                         <GridView.ItemTemplate>
@@ -71,8 +102,8 @@
                         </GridView.ItemTemplate>
                     </GridView>
                     <StackPanel RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignBottomWithPanel="True" Orientation="Horizontal">
-                        <Button Content="Tilføj film"></Button>
-                        <Button Content="Fjern film"></Button>
+                        <Button Content="Tilføj film" Command="{Binding AddVisibibleCommand}"></Button>
+                        <Button Content="Fjern film" Command="{Binding RemoveMovieCommand}"></Button>
                     </StackPanel>
                 </RelativePanel>
             </PivotItem>
